@@ -16,45 +16,39 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
     { name: 'Crop Doctor', path: '/crop-doctor' },
     { name: 'Weather', path: '/weather' },
     { name: 'Market', path: '/market' },
-    { name: 'Soil Health', path: '/soil' },
+    { name: 'Soil', path: '/soil' },
     { name: 'Schemes', path: '/schemes' },
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-md py-3' : 'bg-white py-4'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-cream/95 backdrop-blur-md py-4' : 'bg-transparent py-6'}`}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <Leaf className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold text-darkGreen tracking-tight">AgriSmart</span>
+          <Link to="/" className="flex items-center">
+            <span className="font-serif text-3xl text-primary font-normal tracking-tight flex items-center gap-1"><span className="font-semibold">Agri</span>smart</span>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
-            <div className="flex space-x-6">
+          <div className="hidden md:flex items-center space-x-10">
+            <div className="flex space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === link.path ? 'text-primary border-b-2 border-primary' : 'text-gray-600'}`}
+                   className={`text-xs font-semibold tracking-[0.15em] uppercase transition-colors hover:text-secondary ${location.pathname === link.path ? 'text-secondary' : 'text-text-muted'}`}
                 >
                   {link.name}
                 </Link>
               ))}
             </div>
             
-            <div className="flex items-center space-x-4 border-l pl-4 border-gray-200">
-              <div className="flex items-center text-gray-600 text-sm hover:text-primary cursor-pointer transition-colors">
-                <Globe className="h-4 w-4 mr-1" />
-                <span>English</span>
-              </div>
-              <button className="bg-primary hover:bg-darkGreen text-white px-6 py-2 rounded-full font-medium transition-all duration-300 shadow-md hover:shadow-lg">
-                Get Started Free
+            <div className="flex items-center space-x-6">
+              <button className="bg-primary hover:bg-opacity-90 text-white px-6 py-3 text-xs font-semibold tracking-widest uppercase transition-all duration-300">
+                Get Started
               </button>
             </div>
           </div>
@@ -63,7 +57,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-gray-600 hover:text-primary"
+              className="text-primary"
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -73,24 +67,21 @@ export default function Navbar() {
 
       {/* Mobile Nav */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg absolute w-full left-0 top-full">
-          <div className="px-4 pt-2 pb-6 space-y-2">
+        <div className="md:hidden bg-cream border-t border-primary/10 shadow-lg absolute w-full left-0 top-full">
+          <div className="px-6 pt-4 pb-8 space-y-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block px-3 py-2 rounded-md font-medium ${location.pathname === link.path ? 'text-primary bg-green-50' : 'text-gray-700 hover:text-primary hover:bg-green-50'}`}
+                className={`block py-2 text-sm font-semibold tracking-widest uppercase ${location.pathname === link.path ? 'text-secondary' : 'text-primary'}`}
               >
                 {link.name}
               </Link>
             ))}
-            <div className="pt-4 border-t border-gray-100 flex flex-col space-y-4">
-              <div className="flex items-center px-3 text-gray-700">
-                <Globe className="h-5 w-5 mr-2" /> Language: English
-              </div>
-              <button className="w-full bg-primary text-white px-4 py-2 rounded-full font-medium shadow-md">
-                Get Started Free
+            <div className="pt-6 border-t border-primary/10">
+              <button className="w-full bg-primary text-white px-4 py-3 text-sm font-semibold tracking-widest uppercase shadow-md">
+                Get Started
               </button>
             </div>
           </div>
