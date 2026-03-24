@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Leaf, Menu, X, Globe } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,40 +24,65 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-primary/10 ${isScrolled ? 'bg-cream/98 backdrop-blur-md py-4 shadow-sm' : 'bg-cream/95 py-6'}`}>
+    <nav
+      style={{ backgroundColor: '#2B4530' }}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/10 ${isScrolled ? 'shadow-sm py-4' : 'py-6'}`}
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="font-serif text-3xl text-primary font-normal tracking-tight flex items-center gap-1"><span className="font-semibold">Agri</span>smart</span>
+            <span
+              style={{ fontFamily: '"Playfair Display", serif', color: '#fff', fontSize: '1.75rem', fontWeight: 600, letterSpacing: '-0.01em' }}
+            >
+              Agri<span style={{ color: '#C87A3F' }}>smart</span>
+            </span>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-10">
-            <div className="flex space-x-8">
+          <div className="hidden md:flex items-center gap-10">
+            <div className="flex gap-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                   className={`text-xs font-semibold tracking-[0.15em] uppercase transition-colors hover:text-secondary ${location.pathname === link.path ? 'text-secondary' : 'text-text-muted'}`}
+                  style={{
+                    fontSize: '0.7rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                    color: location.pathname === link.path ? '#C87A3F' : 'rgba(255,255,255,0.75)',
+                    transition: 'color 0.2s',
+                    textDecoration: 'none',
+                  }}
                 >
                   {link.name}
                 </Link>
               ))}
             </div>
-            
-            <div className="flex items-center space-x-6">
-              <button className="bg-primary hover:bg-opacity-90 text-white px-6 py-3 text-xs font-semibold tracking-widest uppercase transition-all duration-300">
-                Get Started
-              </button>
-            </div>
+
+            <button
+              style={{
+                backgroundColor: '#2B4530',
+                color: '#fff',
+                padding: '0.6rem 1.5rem',
+                fontSize: '0.7rem',
+                fontWeight: 600,
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              Get Started
+            </button>
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-primary"
+              style={{ color: '#fff', background: 'none', border: 'none', cursor: 'pointer' }}
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -67,20 +92,42 @@ export default function Navbar() {
 
       {/* Mobile Nav */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-cream border-t border-primary/10 shadow-lg absolute w-full left-0 top-full">
+        <div style={{ backgroundColor: '#2B4530', borderTop: '1px solid rgba(255,255,255,0.1)' }} className="md:hidden absolute w-full left-0 top-full shadow-lg">
           <div className="px-6 pt-4 pb-8 space-y-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block py-2 text-sm font-semibold tracking-widest uppercase ${location.pathname === link.path ? 'text-secondary' : 'text-primary'}`}
+                style={{
+                  display: 'block',
+                  padding: '0.5rem 0',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  color: location.pathname === link.path ? '#C87A3F' : 'rgba(255,255,255,0.85)',
+                  textDecoration: 'none',
+                }}
               >
                 {link.name}
               </Link>
             ))}
-            <div className="pt-6 border-t border-primary/10">
-              <button className="w-full bg-primary text-white px-4 py-3 text-sm font-semibold tracking-widest uppercase shadow-md">
+            <div style={{ paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+              <button
+                style={{
+                  width: '100%',
+                  backgroundColor: '#2B4530',
+                  color: '#fff',
+                  padding: '0.75rem',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+              >
                 Get Started
               </button>
             </div>
